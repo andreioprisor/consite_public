@@ -22,7 +22,7 @@ It is a pipeline of 3 steps:
 3. Application Container (app)
  - The main server, orchestrating operations and depending on db and parser.
 
-Deployment is streamlined using docker-compose.yaml, which connects and manages the containers efficiently.
+Deployment is streamlined using `docker-compose.yaml` file, which connects and manages the containers efficiently.
 
 ## Run with Docker
 
@@ -30,7 +30,7 @@ Deployment is streamlined using docker-compose.yaml, which connects and manages 
 2. Install Docker if you don't have it already
 3. Create the image for santier with `docker build -t santier:v7 .` command in the root directory
 4. Create the parser image with `docker build -t parser:v7 .` in src/invoice_parser
-5. Run docker compose up in root directory and you are done
+5. Run `docker compose up` in root directory and you are done
 
 
 ## Features of the Backend architecture
