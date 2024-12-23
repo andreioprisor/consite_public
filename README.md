@@ -18,7 +18,7 @@ It is a pipeline of 3 steps:
 1. Database Container (db)
  - Handles all database operations.
 2. Parser Container (parser)
- - Runs the AI document parser with CUDA support for GPU acceleration.
+ - Runs the AI document parser with CUDA support for GPU inference.
 3. Application Container (app)
  - The main server, orchestrating operations and depending on db and parser.
 
