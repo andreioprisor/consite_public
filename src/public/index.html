@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Site Management App</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>Construction Site Management App</h1>
+
+    <!-- Button for Fetching All Records -->
+    <h2>Fetch All Records</h2>
+    <button id="fetchAll">Fetch All Products</button>
+    <div id="fetchAllResults"></div>
+
+    <!-- Form for Filtering Records -->
+    <h2>Filter Records</h2>
+    <form id="filterForm">
+        <input type="text" id="key" placeholder="key">
+        <input type="text" id="value" placeholder="value">
+        <button type="submit">Filter Products</button>
+    </form>
+    <div id="filterResults"></div>
+
+    <!-- Form for Updating a Product -->
+    <h2>Update Product</h2>
+    <form id="updateForm">
+        <input type="number" id="updateId" placeholder="Product ID" required>
+        <input type="text" id="updateData" placeholder="JSON data">
+        <button type="submit">Update Product</button>
+    </form>
+
+    <!-- Form for Adding a Document with Products -->
+    <h2>Add Document and Products</h2>
+    <form id="addDocsForm">
+        <h3>Add Document</h3>
+        <input type="text" id="furnizor" placeholder="Furnizor" required>
+        <input type="date" id="dataIntrare" placeholder="Data Intrare" required>
+        <input type="date" id="dataScadenta" placeholder="Data Scadenta">
+        <input type="number" id="tip" placeholder="Tip Document" required>
+        <input type="text" id="documentNumber" placeholder="Document Number" required>
+    
+        <h3>Add Supplier</h3>
+        <input type="text" id="denumire" placeholder="Denumire" required>
+        <input type="text" id="codFiscal" placeholder="Cod Fiscal" required>
+        <input type="text" id="regCom" placeholder="Reg Com">
+        <input type="text" id="adresa" placeholder="Adresa">
+        <input type="text" id="banca" placeholder="Banca">
+        <input type="text" id="contBancar" placeholder="Cont Bancar">
+        <input type="text" id="persoanaContact" placeholder="Persoana Contact">
+        <input type="text" id="telefon" placeholder="Telefon">
+        <input type="email" id="email" placeholder="Email">
+    
+        <h3>Add Products</h3>
+        <!-- Allow for multiple products addition -->
+        <div id="productFields">
+            <input type="text" name="denumire[]" placeholder="Denumire Produs" required>
+            <input type="number" name="cantitate[]" placeholder="Cantitate" required>
+            <input type="text" name="unitateMasura[]" placeholder="Unitate Masura">
+            <input type="number" name="pret[]" placeholder="Pret">
+        </div>
+        <button type="button" onclick="addProductField()">Add Another Product</button>
+    
+        <button type="submit">Add Document</button>
+    </form>
+    <script>
+        function addProductField() {
+            const container = document.getElementById('productFields');
+            const html = `
+                <div>
+                    <input type="text" name="denumire[]" placeholder="Denumire Produs" required>
+                    <input type="number" name="cantitate[]" placeholder="Cantitate" required>
+                    <input type="text" name="unitateMasura[]" placeholder="Unitate Masura">
+                    <input type="number" name="pret[]" placeholder="Pret">
+                </div>
+            `;
+            container.innerHTML += html;
+        }
+    </script>
+
+    <script>
+        // Define the base URL depending on the environment
+        var baseURL = 'http://santier:5000/api/';
+
+        document.getElementById('fetchAll').addEventListener('click', function() {
+            axios.get(baseURL)
+                .then(response => {
+                    document.getElementById('fetchAllResults').innerHTML = JSON.stringify(response.data, null, 2);
+                })
+                .catch(error => console.error('Error fetching products:', error));
+        });
+
+        document.getElementById('filterForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const key = document.getElementById('key').value;
+            const value = document.getElementById('value').value;
+            
+            const filter = {};
+            filter[key] = value;
+
+            axios.post(baseURL + '/filter', filter)
+                .then(response => {
+                    document.getElementById('filterResults').innerHTML = JSON.stringify(response.data, null, 2);
+                })
+                .catch(error => console.error('Error filtering products:', error));
+        });
+
+        document.getElementById('updateForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const id = document.getElementById('updateId').value;
+            const updatedData = document.getElementById('updateData').value;
+            axios.put(baseURL + `/update/${id}`, JSON.parse(updatedData))
+                .then(response => {
+                    alert('Product updated successfully!');
+                })
+                .catch(error => console.error('Error updating product:', error));
+        });
+
+        
+    </script>
+
+    <script>
+        document.getElementById('addDocsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Collect Document information
+            const doc = {
+                furnizor: document.getElementById('furnizor').value,
+                data_intrare: document.getElementById('dataIntrare').value,
+                data_scadenta: document.getElementById('dataScadenta').value,
+                tip: parseInt(document.getElementById('tip').value),
+                document_number: document.getElementById('documentNumber').value
+            };
+        
+            // Collect Supplier information
+            const supplier = {
+                denumire: document.getElementById('denumire').value,
+                cod_fiscal: document.getElementById('codFiscal').value,
+                reg_com: document.getElementById('regCom').value,
+                adresa: document.getElementById('adresa').value,
+                banca: document.getElementById('banca').value,
+                cont_bancar: document.getElementById('contBancar').value,
+                persoana_contact: document.getElementById('persoanaContact').value,
+                telefon: document.getElementById('telefon').value,
+                email: document.getElementById('email').value
+            };
+        
+            // Collect Products information
+            const products= [];
+            const denumireElements = document.getElementsByName('denumire[]');
+            const cantitateElements = document.getElementsByName('cantitate[]');
+            const unitateMasuraElements = document.getElementsByName('unitateMasura[]');
+            const pretElements = document.getElementsByName('pret[]');
+        
+            for (let i = 0; i < denumireElements.length; i++) {
+                products.push({
+                    denumire: denumireElements[i].value,
+                    cantitate: parseInt(cantitateElements[i].value),
+                    unitate_masura: unitateMasuraElements[i].value,
+                    pret: parseFloat(pretElements[i].value)
+                });
+            }
+        
+            // Use Axios to send the POST request
+            axios.post(baseURL + '/docs/add', { doc, supplier, products })
+                .then(response => {
+                    alert('Document and products added successfully!');
+                })
+                .catch(error => console.error('Error adding document:', error));
+        });
+    </script>
+    
+</body>
+</html>

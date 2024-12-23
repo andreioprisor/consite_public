@@ -1,0 +1,11 @@
+pdfminer.six
+PyMuPDF
+Pillow
+networkx
+matplotlib
+pandas
+scikit-learn
+numpy
+fs
+flask
+transformers

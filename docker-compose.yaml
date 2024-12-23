@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  app:
+    image: santier:v7
+    depends_on:
+      - db
+      - parser
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"  # Maps port 5000 on the host to port 5000 on the container
+    networks:
+      - back-tier
+    volumes:
+      - uploads:/app/uploads
+    command: ["/bin/sh", "-c", "./wait-for-it.sh db:3307 -- npm run migrate && npm run dev"]
+
+  parser:
+    image: parser:v5
+    ports: 
+      - "65432:65432"
+    networks:
+      - back-tier
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+
+  db:
+    image: mariadb:10.5
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - back-tier
+
+
+networks:
+  back-tier: {}  # Defines a network named back-tier
+
+volumes:
+  db-data: {}  # Persistent volume for MySQL data
+  uploads: {}  # Persistent volume for file uploads
+
+configs:
+  httpd-config:
+    external: true  # Reference to an external config
+
+secrets:
+  server-certificate:
+    external: true  # Reference to an external secret

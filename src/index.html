@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Test</title>
+</head>
+<body>
+    <h1>Upload File</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="fileInput" name="file">
+        <button type="submit">Upload File</button>
+    </form>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const fileInput = document.getElementById('fileInput');
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            fetch('http://localhost:5000/api/tables/parse', {
+                method: 'POST',
+                body: formData, // FormData will be sent as 'multipart/form-data'
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('File uploaded successfully: ' + JSON.stringify(data));
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Failed to upload file.');
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+

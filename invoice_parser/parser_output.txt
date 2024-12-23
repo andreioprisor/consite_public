@@ -1,0 +1,154 @@
+-----------------------------------------------
+Extracted Text:
+
+|  SC MARICON SRL
+|  Sos. Chitilei, nr.339, Parter, Cam.2, Bucuresti, Sector 1
+|  CUI : RO42502
+|  Reg.Com. J40/20122/1992
+|  RO48 BTRL RONC RT03 0603 0301
+|  BANCA TRANSILVANIA-SUC. UNIRII
+|  RO09 BRDE 410S V460 7948 4100 -  B.R.D.- BRATIANU
+|  Proforma N|  °|  4906291 din: 30/10/2024
+|  Nr|  1|  Articole|  53182|  Denumire|  RADIATOR OTEL RDX 22 600x600 (1237W) BUC|  Um|  2.00030.10.2024|  CantTermen|  Pret Unitar|  184.000|      Valoare Valoare cu TVA|  368.000|   437.920
+|  2|  53040|   RADIATOR OTEL RDX 22x600x800 (1649W) BUC|  8.00030.10.2024|  225.630|     1,805.040|   2,147.998
+|  3|  53041|  RADIATOR OTEL RDX 22x600x1000 (2061W)BUC|  3.00030.10.2024|  270.050|      810.150|   964.079
+|  4|  53049|  RADIATOR OTEL RDX 22x600x1200 (2473W)BUC|  2.00030.10.2024|  321.980|      643.960|   766.312
+|  5|  56077|   RADIATOR BAIE OTEL PURMO BANGA|  500x1222 DREPT ALB|         BUC|  1.00030.10.2024|  178.640|      178.640|   212.582
+|  6|  34672|  SDR7,4 L4m ALBA - Valrom - 10033032004|  TEAVA PPR COMPOZITA D.32x4.4mm PN20|  ML|  1.00030.10.2024|   6.740|       6.740|    8.021
+|  7|  34703|  - RAND32290032000|  COT PPR D.32x90 PN20 SDR6 ALB - Valrom|  BUC|  1.00030.10.2024|   1.180|       1.180|    1.404
+|  8|  34863|   COT PPR D.32x45 PN20 SDR6 ALB|    BUC|  1.00030.10.2024|   1.090|       1.090|    1.297
+|  9|  34793|  RAND33200032000|  TEU PPR D.32 PN20 SDR6 ALB - Valrom -|  BUC|  1.00030.10.2024|   1.340|       1.340|    1.595
+|  10 12239|  WIFI 30kW + kit evacuare|  Centrala Ariston condensare CLAS ONE|  BUC|  1.00030.10.2024|  4,193.280|     4,193.280|   4,990.003
+|  11|  14194|   Termostat ambient neprogramabil fara fir|  Salus - DT300RF|           BUC|  1.00030.10.2024|  142.790|      142.790|   169.920
+|  12 50495|  (MINI)|  Filtru antimagnetita 3/4" TURBOMAG-PL|  BUC|  1.00030.10.2024|  187.200|      187.200|   222.768
+TOTAL Comanda RON 	8,339.41 	9,923.90
+
+
+
+-----------------------------------------------
+Generated Response:
+
+{
+"beneficiary": "SC MARICON SRL",
+"supplier": "SC MARICON SRL",
+"supplier_fiscal_code": "RO42502",
+"phone": null,
+"email": null,
+"iban": "RO48 BTRL RONC RT03 0603 0301",
+"bank": "BANCA TRANSILVANIA-SUC. UNIRII",
+"invoice_number": "4906291",
+"issuance_date": "30/10/2024",
+"due_date": null,
+"total": "8,339.41",
+"total_with_tva": "9,923.90",
+"products": [
+{
+"name": "RADIATOR OTEL RDX 22 600x600 (1237W) BUC",
+"quantity": 2.000,
+"unit_price": 184.000,
+"currency": "RON",
+"unit_of_measure": "2.000",
+"total_value": "368.000",
+"tva": "437.920"
+},
+{
+"name": "RADIATOR OTEL RDX 22x600x800 (1649W) BUC",
+"quantity": 8.000,
+"unit_price": 225.630,
+"currency": "RON",
+"unit_of_measure": null,
+"total_value": "1,805.040",
+"tva": "2,147.998"
+},
+{
+"name": "RADIATOR OTEL RDX 22x600x1000 (2061W)BUC",
+"quantity": 3.000,
+"unit_price": 270.050,
+"currency": "RON",
+"unit_of_measure": null,
+"total_value": "810.150",
+"tva": "964.079"
+},
+{
+"name": "RADIATOR OTEL RDX 22x600x1200 (2473W)BUC",
+"quantity": 2.000,
+"unit_price": 321.980,
+"currency": "RON",
+"unit_of_measure": null,
+"total_value": "643.960",
+"tva": "766.312"
+},
+{
+"name": "RADIATOR BAIE OTEL PURMO BANGA",
+"quantity": 1.000,
+"unit_price": 178.640,
+"currency": "RON",
+"unit_of_measure": null,
+"total_value": "178.640",
+"tva": "212.582"
+},
+{
+"name": "SDR7,4 L4m ALBA - Valrom - 10033032004",
+"quantity": 1.000,
+"unit_price": 6.740,
+"currency": "RON",
+"unit_of_measure": "ML",
+"total_value": "6.740",
+"tva": "8.021"
+},
+{
+"name": "COT PPR D.32x90 PN20 SDR6 ALB - Valrom",
+"quantity": 1.000,
+"unit_price": 1.180,
+"currency": "RON",
+"unit_of_measure": "BUC",
+"total_value": "1.180",
+"tva": "1.404"
+},
+{
+"name": "COT PPR D.32x45 PN20 SDR6 ALB",
+"quantity": 1.000,
+"unit_price": 1.090,
+"currency": "RON",
+"unit_of_measure": "BUC",
+"total_value": "1.090",
+"tva": "1.297"
+},
+{
+"name": "TEU PPR D.32 PN20 SDR6 ALB - Valrom -",
+"quantity": 1.000,
+"unit_price": 1.340,
+"currency": "RON",
+"unit_of_measure": "BUC",
+"total_value": "1.340",
+"tva": "1.595"
+},
+{
+"name": "WIFI 30kW + kit evacuare",
+"quantity": 1.000,
+"unit_price": 4,193.280,
+"currency": "RON",
+"unit_of_measure": null,
+"total_value": "4,193.280",
+"tva": "4,990.003"
+},
+{
+"name": "Termostat ambient neprogramabil fara fir",
+"quantity": 1.000,
+"unit_price": 142.790,
+"currency": "RON",
+"unit_of_measure": null,
+"total_value": "142.790",
+"tva": "169.920"
+},
+{
+"name": "Filtru antimagnetita 3/4\" TURBOMAG-PL",
+"quantity": 1.000,
+"unit_price": 187.200,
+"currency": "RON",
+"unit_of_measure": null,
+"total_value": "187.200",
+"tva": "222.768"
+}
+]
+}
