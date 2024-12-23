@@ -51,12 +51,13 @@ Consite centralizes all document data extracted from the construction site, such
 The system includes a sophisticated Parser module (`invoice_parser/`) that processes documents through a three-step pipeline:
 
 1. **Text Extraction**:  
-   Identifies and extracts text boxes along with their bounding boxes from PDF documents.
+   Identifies and extracts text boxes along with their bounding boxes, fonts and sizes from each page of the PDF documents.
 
 2. **Alignment Retention Algorithm**:  
    Applies a proprietary algorithm to assemble the extracted text into a string that maintains the original PDF alignment.  
+   This algorithm processes and clusters the original lines from the PDF by analyzing the positioning, font styles, and text sizes. It detects table-like structures by identifying deviations from the median alignment of text elements. Using this information, the algorithm reconstructs a "painted string" that preserves the document's original layout and alignment.
 
-3. **LLM Inference**:  
+4. **LLM Inference**:  
    Utilizes inference on a fine-tuned LLAMA 3.1 model to extract key fields from the structured text into JSON format.  
    The extracted output looks like this:  
 
