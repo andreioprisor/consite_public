@@ -13,6 +13,17 @@ It is a pipeline of 3 steps:
 	- Second step is to apply an in-house alghoritm to build a string from the text boxes which keeps de PDF origina aligment.
 	- Third step is the extraction done with inference on our fine tuned LLAMA 3.1 and parsing of the output into a json format.
 
+## Docker architecture
+
+1. Database Container (db)
+ - Handles all database operations.
+2. Parser Container (parser)
+ - Runs the AI document parser with CUDA support for GPU acceleration.
+3. Application Container (app)
+ - The main server, orchestrating operations and depending on db and parser.
+
+Deployment is streamlined using docker-compose.yaml, which connects and manages the containers efficiently.
+
 ## Run with Docker
 
 1. Clone this repository
