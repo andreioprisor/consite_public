@@ -140,6 +140,7 @@ REDIS_PASSWORD=your-password
 
 ```
 specs\
+invoice_parser\ # Invoice Parser with it's docker support
 src\
  |--config\         # Environment variables and configuration related things
  |--controllers\    # Route controllers (controller layer)
