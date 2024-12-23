@@ -59,35 +59,44 @@ The system includes a sophisticated Parser module (`invoice_parser/`) that proce
 
 The system includes a sophisticated Parser module (`invoice_parser/`) that processes documents through a three-step pipeline:
 
-1. **Text Extraction**: Identifies and extracts text boxes along with their bounding boxes from PDF documents
-2. **Alignment Retention Algorithm**: Applies a proprietary algorithm to assemble the extracted text into a string that maintains the original PDF alignment.
-3. **LLM Inference**: Utilizes inference on a fine-tuned LLAMA 3.1 model to extract key fields from the structured text into JSON format.The extracted output looks like this :
-   `{{
-            "beneficiary": string,
-            "supplier": string,
-            "supplier_fiscal_code": string,
-            "phone": string or null,
-            "email": string or null,
-            "iban": string,
-            "bank": string,
-            "invoice_number": string,
-            "issuance_date": string,
-            "due_date": string or null,
-            "total": string,
-            "total_with_tva": string,
-            "products": [
-            {{
-            "name": string,
-            "quantity": number,
-            "unit_price": number,
-            "currency": string,
-            "unit_of_measure": string,
-            "total_value": string,
-            "tva": string
-            }}
-            ]
-      }`
-   Examples of inputs and outputs of the model can be found in `/invoice_parser/parser_output.txt` and the corresponding PDF invoices in `/invoice_parser/tests/inputs`.
+1. **Text Extraction**:  
+   Identifies and extracts text boxes along with their bounding boxes from PDF documents.
+
+2. **Alignment Retention Algorithm**:  
+   Applies a proprietary algorithm to assemble the extracted text into a string that maintains the original PDF alignment.  
+
+3. **LLM Inference**:  
+   Utilizes inference on a fine-tuned LLAMA 3.1 model to extract key fields from the structured text into JSON format.  
+   The extracted output looks like this:  
+
+   ```json
+   {
+       "beneficiary": "string",
+       "supplier": "string",
+       "supplier_fiscal_code": "string",
+       "phone": "string or null",
+       "email": "string or null",
+       "iban": "string",
+       "bank": "string",
+       "invoice_number": "string",
+       "issuance_date": "string",
+       "due_date": "string or null",
+       "total": "string",
+       "total_with_tva": "string",
+       "products": [
+           {
+               "name": "string",
+               "quantity": "number",
+               "unit_price": "number",
+               "currency": "string",
+               "unit_of_measure": "string",
+               "total_value": "string",
+               "tva": "string"
+           }
+       ]
+   }  
+
+   Examples of inputs and outputs of the model can be found in `/invoice_parser/parser_output.txt` and the corresponding PDF invoices in `/invoice_parser/tests/inputs`.  
    For the training of the model I've used 30% real data and 70% syntetic data generated with models like GPT 4, as the procurement of invoices is not an easy task.
 
 ## Environment Variables
