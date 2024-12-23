@@ -1,28 +1,32 @@
-# A comprehensive App with all the features needed for deployment
-Consite is an app which is a comprehensive app for construciton companies. It has all features needed for deployment.
-The app is built with Node.js, Express, Sequelize for backend and database and Vue for frontend. The app has all the features needed for deployment like authentication, authorization, ORM, migration, seed, logging, testing, caching, bidirectional communication, job scheduler, dependency management, environment variables, CORS, Docker support, linting etc.
-The app is designeed to centralize all document data extracted from the construction site(like materials bought, inventory, invoices, etc), making it really easy to access.
-The centralization relies into 3 tables: 
-	- Documents: Contains all the documents 
-	- Suppliers: Contains all the suppliers
-	- Products: Contains all the products bought
+# Consite: Comprehensive AI Construction Management App
 
-For document extraction / parsing, Consite integrates a powerful Parser solution, defined in invoice_parser folder. The parser is a standalone app that can be used to extract data from invoices. 
-It is a pipeline of 3 steps:
-	- First step is to extract the text boxes alongside their text bounding boexes. 
-	- Second step is to apply an in-house alghoritm to build a string from the text boxes which keeps de PDF origina aligment.
-	- Third step is the extraction done with inference on our fine tuned LLAMA 3.1 and parsing of the output into a json format.
+Consite is a robust application designed for construction companies, built to streamline all aspects of document management on the construction site. This includes materials procurement, inventory management, and invoice handling. Consite is built using a stack that combines Node.js, Express, Sequelize, and Vue.js, ensuring a solid and scalable backend coupled with a responsive frontend.
 
-## Docker architecture
+## Key Features
 
-1. Database Container (db)
- - Handles all database operations.
-2. Parser Container (parser)
- - Runs the AI document parser with CUDA support for GPU inference.
-3. Application Container (app)
- - The main server, orchestrating operations and depending on db and parser.
+- **Authentication and Authorization:** Ensures secure access to the application.
+- **ORM, Migration, and Seed:** Efficient database management and data seeding.
+- **Logging and Testing:** Comprehensive logging and systematic testing for robustness.
+- **Caching and Bi-directional Communication:** Enhanced performance and real-time data exchange.
+- **Job Scheduler and Dependency Management:** Automated tasks and well-managed dependencies.
+- **Environment Variables and CORS:** Secure and flexible configuration management.
+- **Docker Support and Linting:** Simplified deployment and consistent code quality.
 
-Deployment is streamlined using `docker-compose.yaml` file, which connects and manages the containers efficiently.
+## Centralized Document Data Management
+
+Consite centralizes all document data extracted from the construction site, such as materials bought, inventory records, and invoices, into a user-friendly interface. This centralization is organized into three main tables:
+- **Documents:** Stores all the documents.
+- **Suppliers:** Maintains records of all suppliers.
+- **Products:** Lists all the products bought.
+
+### Intelligent Document Processing with LLMs
+
+The system includes a sophisticated Parser module (`invoice_parser/`) that processes documents through a three-step pipeline:
+
+1. **Text Extraction**: Identifies and extracts text boxes along with their bounding boxes from PDF documents
+2. **Alignment Retention Algorithm**: Applies a proprietary algorithm to assemble the extracted text into a string that maintains the original PDF alignment
+3. **Data Parsing**: Utilizes inference on a finely tuned LLAMA 3.1 model to convert the structured text into JSON format
+
 
 ## Run with Docker
 
@@ -30,7 +34,7 @@ Deployment is streamlined using `docker-compose.yaml` file, which connects and m
 2. Install Docker if you don't have it already
 3. Create the image for santier with `docker build -t santier:v7 .` command in the root directory
 4. Create the parser image with `docker build -t parser:v7 .` in src/invoice_parser
-5. Run `docker compose up` in root directory and you are done
+5. Run docker compose up in root directory and you are done
 
 
 ## Features of the Backend architecture
@@ -51,7 +55,40 @@ Deployment is streamlined using `docker-compose.yaml` file, which connects and m
 - **Docker support**
 - **Linting**: with [ESLint](https://eslint.org) and [Prettier](https://prettier.io)
 
-## Features of the Parser
+### AI Document Parser
+
+The system includes a sophisticated Parser module (`invoice_parser/`) that processes documents through a three-step pipeline:
+
+1. **Text Extraction**: Identifies and extracts text boxes along with their bounding boxes from PDF documents
+2. **Alignment Retention Algorithm**: Applies a proprietary algorithm to assemble the extracted text into a string that maintains the original PDF alignment.
+3. **LLM Inference**: Utilizes inference on a fine-tuned LLAMA 3.1 model to extract key fields from the structured text into JSON format.The extracted output looks like this :
+   `{{
+            "beneficiary": string,
+            "supplier": string,
+            "supplier_fiscal_code": string,
+            "phone": string or null,
+            "email": string or null,
+            "iban": string,
+            "bank": string,
+            "invoice_number": string,
+            "issuance_date": string,
+            "due_date": string or null,
+            "total": string,
+            "total_with_tva": string,
+            "products": [
+            {{
+            "name": string,
+            "quantity": number,
+            "unit_price": number,
+            "currency": string,
+            "unit_of_measure": string,
+            "total_value": string,
+            "tva": string
+            }}
+            ]
+      }`
+   Examples of inputs and outputs of the model can be found in `/invoice_parser/parser_output.txt` and the corresponding PDF invoices in `/invoice_parser/tests/inputs`.
+   For the training of the model I've used 30% real data and 70% syntetic data generated with models like GPT 4, as the procurement of invoices is not an easy task.
 
 ## Environment Variables
 
