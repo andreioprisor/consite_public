@@ -94,10 +94,10 @@ The system includes a sophisticated Parser module (`invoice_parser/`) that proce
                "tva": "string"
            }
        ]
-   }  
+   }```
 
-   Examples of inputs and outputs of the model can be found in `/invoice_parser/parser_output.txt` and the corresponding PDF invoices in `/invoice_parser/tests/inputs`.  
-   For the training of the model I've used 30% real data and 70% syntetic data generated with models like GPT 4, as the procurement of invoices is not an easy task.
+Examples of inputs and outputs of the model can be found in `/invoice_parser/parser_output.txt` and the corresponding PDF invoices in `/invoice_parser/tests/inputs`.  
+For the training of the model I've used 30% real data and 70% syntetic data generated with models like GPT 4, as the procurement of invoices is not an easy task.
 
 ## Environment Variables
 
