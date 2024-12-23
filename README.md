@@ -19,15 +19,6 @@ Consite centralizes all document data extracted from the construction site, such
 - **Suppliers:** Maintains records of all suppliers.
 - **Products:** Lists all the products bought.
 
-### Intelligent Document Processing with LLMs
-
-The system includes a sophisticated Parser module (`invoice_parser/`) that processes documents through a three-step pipeline:
-
-1. **Text Extraction**: Identifies and extracts text boxes along with their bounding boxes from PDF documents
-2. **Alignment Retention Algorithm**: Applies a proprietary algorithm to assemble the extracted text into a string that maintains the original PDF alignment
-3. **Data Parsing**: Utilizes inference on a finely tuned LLAMA 3.1 model to convert the structured text into JSON format
-
-
 ## Run with Docker
 
 1. Clone this repository
